@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>时钟</title>
+    <style>
+        div {
+            width: 900px;
+            height: 600px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <canvas width="900" height="600"></canvas>
+    </div>
+    <script>
+        var canvas = document.getElementsByTagName("canvas")[0];
+        var ctx = canvas.getContext('2d');
+        var x0 = canvas.width / 2;
+        var y0 = canvas.height / 2;
+
+        function clockBackground(params) {
+            //外围圈圈
+            ctx.beginPath();
+            ctx.arc(x0, y0, 260, 0, 2 * Math.PI);
+            ctx.lineWidth = 50;
+            ctx.strokeStyle = '#AE81FF';
+            ctx.stroke();
+            //时刻度
+            for (var i = 0; i < 12; i++) {
+                ctx.save();
+                ctx.beginPath();
+                ctx.lineWidth=10;
+                ctx.strokeStyle = 'black';
+                ctx.translate(x0, y0);
+                ctx.rotate(i * 30 * Math.PI / 180);
+                ctx.moveTo(0, 200);
+                ctx.lineTo(0, 230);
+                ctx.stroke();
+                ctx.restore();
+            }
+            //分刻度
+            for (var i = 0; i < 60; i++) {
+                ctx.save();
+                ctx.beginPath();
+                ctx.lineWidth = 4;
+                ctx.strokeStyle = 'black';
+                ctx.translate(x0, y0);
+                ctx.rotate(i * 6 * Math.PI / 180);
+                ctx.moveTo(0, 210);
+                ctx.lineTo(0, 230);
+                ctx.stroke();
+                ctx.restore();
+            }
+        }
+
+        function clock(params) {
+            //清空
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            clockBackground();
+            //获取系统时间
+            var date = new Date();
+            var hours = date.getHours();
+            var minutes = date.getMinutes();
+            var seconds = date.getSeconds();
+            //时针偏移
+            hours=hours+minutes/60;
+            hours = hours > 12 ? hours - 12 : hours;
+            // console.log(hours, minutes, seconds);
+            //时针
+            ctx.save();
+            ctx.beginPath();
+            ctx.lineCap='round';
+            ctx.lineWidth = 15;
+            ctx.strokeStyle = 'black';
+            ctx.translate(x0, y0);
+            ctx.rotate(hours * 30 * Math.PI / 180);
+            ctx.moveTo(0, -130);
+            ctx.lineTo(0, 10);
+            ctx.stroke();
+            ctx.restore();
+            //分针
+            ctx.save();
+            ctx.beginPath();
+            ctx.lineCap = 'round';
+            ctx.lineWidth = 9;
+            ctx.strokeStyle = 'black';
+            ctx.translate(x0, y0);
+            ctx.rotate(minutes * 6 * Math.PI / 180);
+            ctx.moveTo(0,-170);
+            ctx.lineTo(0, 10);
+            ctx.stroke();
+            ctx.restore();
+            //秒针
+            ctx.save();
+            ctx.beginPath();
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = 'red';
+            ctx.translate(x0, y0);
+            ctx.rotate(seconds * 6 * Math.PI / 180);
+            ctx.moveTo(0,-200);
+            ctx.lineTo(0,20);
+            ctx.stroke();
+            ctx.restore();
+            //中心小圆点
+            ctx.save();
+            ctx.beginPath();
+            ctx.fillStyle='red';
+            ctx.arc(x0,y0,10,0,2*Math.PI);
+            ctx.fill();
+            ctx.restore();
+        }
+        clock();
+        setInterval(clock,100);
+    </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>测试用</title>
+</head>
+<body>
+    <canvas width="900" height="600" style="border: 1px solid #000"></canvas>
+<script src="js/underScore-min.js"></script>
+<script src="js/djxColorBall.js"></script>
+<script>
+    var canvas = document.getElementsByTagName("canvas")[0];
+    var ctx = canvas.getContext('2d');
+    var ballArr=[];
+    var colorArr = ['rgb(255,0,0)', 'rgb(255,165,0)', 'rgb(255,255,0)', 'rgb(0,255,0)', 'rgb(0,127,255)', 'rgb(0,0,255)', 'rgb(139,0,255)'];
+    setInterval(function(){
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        for (var i = 0; i < ballArr.length; i++) {
+            ballArr[i].update();
+            if(ballArr[i].r<=0){
+                ballArr = _.without(ballArr,ballArr[i]);
+            }
+        }
+        for(var i=0;i<ballArr.length;i++){
+            ballArr[i].render(ctx);
+        }
+    },25);
+    canvas.onmousemove=function(e){
+        var color=colorArr[_.random(0,colorArr.length-1)];
+        ballArr.push(new ColorBall({
+                x: e.offsetX,
+                y: e.offsetY,
+                r: 30,
+                color: color
+            }));
+    }
+</script>
+</body>
+</html>

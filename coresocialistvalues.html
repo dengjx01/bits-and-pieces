@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <title>社会主义核心价值观</title>
+  <style>
+    body, h1, h2, h3, h4, h5, h6, hr, p, blockquote,pre,dl, dt, dd, ul, ol, li,form, fieldset, button, input, textarea,th, td { margin: 0; padding: 0; }
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+    }
+    .move-animation {
+      user-select: none;
+      -moz-user-select: none;
+      animation: mymove 0.7s linear;
+    }
+    @keyframes mymove {
+      from {
+        transform: translateY(0);
+        color: rgba(255, 0, 0, 1);
+      }
+      to {
+        transform: translateY(-80px);
+        color: rgba(255, 0, 0, 0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <script>
+    var sto
+    (function () {
+      clearTimeout(sto)
+      var coreSocialistValues = ['富强', '民主', '文明', '和谐', '自由', '平等', '公正', '法治', '爱国', '敬业', '诚信', '友善']
+      var i = 0
+      var oBody = document.body
+      oBody.onclick = function (e) {
+        var oSpan = document.createElement('span')
+        oSpan.style.position = 'absolute'
+        oSpan.style.left = e.clientX - 24 + 'px'
+        oSpan.style.top = e.clientY - 29 + 'px'
+        oSpan.className = 'move-animation'
+        oSpan.innerText = coreSocialistValues[i]
+        if (i++ >= 11) {
+          i = 0
+        }
+        oBody.appendChild(oSpan)
+
+        sto = setTimeout(function(){
+          oBody.removeChild(oSpan)
+        }.bind(this),650)
+        
+      }
+    })();
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>15-钟表案例</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #clock{
+            background: url("images/clock.jpg") no-repeat;
+            width: 600px;
+            height: 600px;
+            margin: 30px auto;
+            position: relative;
+        }
+        #hour{
+            width: 30px;
+            height: 600px;
+            background: url("images/hour.png") no-repeat;
+            position: absolute;
+            left: 50%;
+            top: 0;
+            margin-left: -15px;
+        }
+        #minute{
+            width: 30px;
+            height: 600px;
+            background: url("images/minute.png") no-repeat;
+            position: absolute;
+            left: 50%;
+            top: 0;
+            margin-left: -15px;
+        }
+        #second{
+            width: 30px;
+            height: 600px;
+            background: url("images/second.png") no-repeat;
+            position: absolute;
+            left: 50%;
+            top: 0;
+            margin-left: -15px;
+            /*transform: rotate(45deg);*/
+        }
+    </style>
+</head>
+<body>
+<div id="clock">
+    <div id="hour"></div>
+    <div id="minute"></div>
+    <div id="second"></div>
+</div>
+<script>
+    // 1.获取标签
+    var hour = document.getElementById('hour');
+    var minute = document.getElementById('minute');
+    var second = document.getElementById('second');
+
+    // 2.让针动
+    setInterval(changeDate,100);
+    function changeDate() {
+        // 1.创建日期对象
+        var date = new Date();
+
+        // 2.获取 小时 分钟 秒
+        var ms = date.getMilliseconds();
+        var s = date.getSeconds() + ms/1000;
+        var m = date.getMinutes();
+        var h = date.getHours() + m/60;
+
+//        console.log(s,m,h);
+
+        // 3.让针动
+        // 秒针
+        second.style.transform = 'rotate('+ s*6 +'deg)';
+        minute.style.transform = 'rotate('+ m*6 +'deg)';
+        hour.style.transform = 'rotate('+ h*30 +'deg)';
+    }
+    changeDate();
+</script>
+</body>
+</html>
