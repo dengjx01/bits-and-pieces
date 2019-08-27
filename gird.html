@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>gird 布局</title>
+  <style>
+    .keyboard{
+      width:736px;
+      height:406px;
+      background-color: #F3F3F6;
+      padding: 14px 0 0 14px;
+      display: grid;
+      grid-template-columns: 170px 170px 170px 170px;
+      grid-template-rows: 87px 87px 87px 87px;
+      grid-gap: 14px;
+    }
+    .keyboard .input-btn{
+      border-radius: 10px;
+      font-size: 40px;
+      font-weight: 800;
+      background-color: #FFFFFF;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .keyboard .input-btn-del{
+      grid-row-start: 1;
+      grid-row-end: 2;
+      grid-column-start: 4;
+      grid-column-end: 5;
+    }
+    .keyboard .input-btn-pay{
+      grid-row-start: 2;
+      grid-row-end: 5;
+      grid-column-start: 4;
+      grid-column-end: 5;
+      color: #FFFFFF;
+      background-color: #06C15F;
+    }
+    .keyboard .input-btn-0{
+      grid-row-start: 4;
+      grid-row-end: 5;
+      grid-column-start: 1;
+      grid-column-end: 3;
+    }
+    .keyboard .input-btn-dot{
+      grid-row-start: 4;
+      grid-row-end: 5;
+      grid-column-start: 3;
+      grid-column-end: 4;
+    }
+  </style>
+</head>
+<body>
+  <div class="keyboard">
+    <div class="input-btn input-btn-1">1</div>
+    <div class="input-btn input-btn-2">2</div>
+    <div class="input-btn input-btn-3">3</div>
+    <div class="input-btn input-btn-4">4</div>
+    <div class="input-btn input-btn-5">5</div>
+    <div class="input-btn input-btn-6">6</div>
+    <div class="input-btn input-btn-7">7</div>
+    <div class="input-btn input-btn-8">8</div>
+    <div class="input-btn input-btn-9">9</div>
+    <div class="input-btn input-btn-0">0</div>
+    <div class="input-btn input-btn-dot">.</div>
+    <div class="input-btn input-btn-del">del</div>
+    <div class="input-btn input-btn-pay">付款</div>
+  </div>
+</body>
+</html>
